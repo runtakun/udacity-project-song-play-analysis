@@ -51,8 +51,6 @@ def process_log_file(cur, filepath):
     for i, row in user_df.iterrows():
         cur.execute(user_table_insert, row)
 
-    cur.execute("DELETE FROM songplays;")
-
     # insert songplay records
     for index, row in df.iterrows():
         start_time = datetime.fromtimestamp(t['ts']/1000)
