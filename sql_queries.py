@@ -11,57 +11,57 @@ times_table_drop = "DROP TABLE IF EXISTS times;"
 
 songplay_table_create = ("""
 CREATE TABLE songplays (
-songplay_id SERIAL not null primary key,
-start_time timestamp,
-user_id varchar,
-level varchar,
-song_id varchar,
-artist_id varchar,
-session_id varchar,
-location varchar,
-user_agent varchar
+songplay_id SERIAL NOT NULL PRIMARY KEY,
+start_time TIMESTAMP NOT NULL,
+user_id VARCHAR NOT NULL,
+level VARCHAR NOT NULL,
+song_id VARCHAR NOT NULL,
+artist_id VARCHAR NOT NULL,
+session_id VARCHAR NOT NULL,
+location VARCHAR NOT NULL,
+user_agent VARCHAR NOT NULL
 );
 """)
 
 user_table_create = ("""
 CREATE TABLE users (
-user_id varchar not null primary key,
-first_name varchar,
-last_name varchar,
-gender varchar,
-level varchar
+user_id VARCHAR NOT NULL PRIMARY KEY,
+first_name VARCHAR NOT NULL,
+last_name VARCHAR NOT NULL,
+gender VARCHAR NOT NULL,
+level VARCHAR NOT NULL
 )
 """)
 
 song_table_create = ("""
 CREATE TABLE songs (
-song_id varchar not null primary key,
-title varchar,
-artist_id varchar,
-year int,
-duration decimal
+song_id VARCHAR NOT NULL PRIMARY KEY,
+title VARCHAR NOT NULL,
+artist_id VARCHAR NOT NULL,
+year INT NOT NULL,
+duration DECIMAL NOT NULL
 )
 """)
 
 artist_table_create = ("""
 CREATE TABLE artists (
-artist_id varchar not null primary key,
-name varchar,
-location varchar,
-latitude decimal,
-longitude decimal
+artist_id VARCHAR NOT NULL PRIMARY KEY,
+name VARCHAR,
+location VARCHAR,
+latitude DECIMAL NOT NULL,
+longitude DECIMAL NOT NULL
 )
 """)
 
 time_table_create = ("""
 CREATE TABLE time (
-start_time timestamp,
-hour int,
-day int,
-week int,
-month int,
-year int,
-weekday int
+start_time TIMESTAMP,
+hour INT NOT NULL,
+day INT NOT NULL,
+week INT NOT NULL,
+month INT NOT NULL,
+year INT NOT NULL,
+weekday INT NOT NULL
 )
 """)
 
