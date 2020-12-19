@@ -1,0 +1,3 @@
+GRANT ALL ON ALL TABLES IN SCHEMA sparkifydb TO student;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA sparkifydb TO student;
+GRANT ALL ON ALL FUNCTIONS IN SCHEMA sparkifydb TO student;
