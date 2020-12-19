@@ -37,7 +37,7 @@ def process_log_file(cur, filepath):
         time_data.append([dt, dt.hour, dt.day, dt.date().isocalendar()[1], dt.month, dt.year, dt.weekday()])
 
     column_labels = ['start_time', 'hour', 'day', 'week', 'month', 'year', 'weekday']
-    time_df = pd.DataFrame(time_data,columns=column_labels)
+    time_df = pd.DataFrame(time_data, columns=column_labels)
 
     cur.execute("DELETE FROM time;")
 
@@ -57,18 +57,19 @@ def process_log_file(cur, filepath):
     # insert songplay records
     for index, row in df.iterrows():
         start_time = datetime.fromtimestamp(t['ts']/1000)
-        
+
         # get songid and artistid from song and artist tables
         cur.execute(song_select, (row.song, row.artist, row.length))
         results = cur.fetchone()
-        
+
         if results:
             songid, artistid = results
         else:
             songid, artistid = None, None
 
         # insert songplay record
-        songplay_data = [start_time, row['userId'], row['level'], songid, artistid, row['sessionId'], row['location'],row['userAgent']]
+        songplay_data = [start_time, row['userId'], row['level'], songid, artistid, row['sessionId'], row['location'],
+                         row['userAgent']]
         cur.execute(songplay_table_insert, songplay_data)
 
 
