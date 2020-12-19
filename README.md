@@ -20,3 +20,5 @@ docker-compose exec app python3 etl.py
 ```
 
 # ERD
+
+![image](https://github.com/runtakun/udacity-project-song-play-analysis/blob/main/erd.png)
