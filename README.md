@@ -4,7 +4,10 @@
 Load song play data of a mobile application and register to PostgreSQL database.
 
 ## ETL process
-ETL consists from two processes; load song data and log data.
+ETL consists from two processes.
+
+- load song and user's song play data.
+- save them to database
 
 ## How to set up
 
