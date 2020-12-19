@@ -4,10 +4,14 @@ import psycopg2
 import pandas as pd
 from sql_queries import *
 from datetime import datetime
-import sys
 
 
 def process_song_file(cur, filepath):
+    """
+    - load song and artist data from song JSON files
+    - register them to `songs` and `artists` table
+    """
+
     # open song file
     df = pd.read_json(filepath, lines=True)
 
@@ -23,6 +27,11 @@ def process_song_file(cur, filepath):
 
 
 def process_log_file(cur, filepath):
+    """
+    - load user, time and song play from log JSON files
+    - register them to `users`, `time` and `songplays` table
+    """
+
     # open log file
     df = pd.read_json(filepath, lines=True)
 
@@ -71,6 +80,11 @@ def process_log_file(cur, filepath):
 
 
 def process_data(cur, conn, filepath, func):
+    """
+    - inspect all JSON files under the directory specified by `filepath` argument value
+    - execute process passed by `func` argument function
+    """
+
     # get all files matching extension from directory
     all_files = []
     for root, dirs, files in os.walk(filepath):
@@ -90,6 +104,12 @@ def process_data(cur, conn, filepath, func):
 
 
 def main():
+    """
+    - connect to `sparkifydb` database
+    - load song and log data from local disk
+    - register its content to database tables
+    """
+
     conn = psycopg2.connect("host=postgres dbname=sparkifydb user=student password=student")
     cur = conn.cursor()
 
