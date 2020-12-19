@@ -29,7 +29,6 @@ def process_log_file(cur, filepath):
     # filter by NextSong action
     df = df.query("page=='NextSong'")
 
-    
     # insert time data records
     
     time_data = []
@@ -93,7 +92,7 @@ def process_data(cur, conn, filepath, func):
 
 
 def main():
-    conn = psycopg2.connect("host=127.0.0.1 dbname=sparkifydb user=student password=student")
+    conn = psycopg2.connect("host=postgres dbname=sparkifydb user=student password=student")
     cur = conn.cursor()
 
     process_data(cur, conn, filepath='data/song_data', func=process_song_file)
