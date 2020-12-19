@@ -16,10 +16,17 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./docker/postgres/init.d:/docker-entrypoint-initdb.d
+      - ./docker/postgres/initdb.d:/docker-entrypoint-initdb.d
     environment:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: root
       POSTGRES_INITDB_ARGS: "--encoding=UTF-8"
     restart: always
     user: root
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - postgres
