@@ -15,8 +15,8 @@ songplay_id SERIAL NOT NULL PRIMARY KEY,
 start_time TIMESTAMP NOT NULL,
 user_id VARCHAR NOT NULL,
 level VARCHAR NOT NULL,
-song_id VARCHAR,
-artist_id VARCHAR,
+song_id VARCHAR NULL,
+artist_id VARCHAR NULL,
 session_id VARCHAR NOT NULL,
 location VARCHAR NOT NULL,
 user_agent VARCHAR NOT NULL
@@ -68,7 +68,8 @@ weekday INT NOT NULL
 # INSERT RECORDS
 
 songplay_table_insert = ("""
-INSERT INTO songplays (start_time, user_id, level, song_id, artist_id, session_id, location, user_agent) VALUES (%s, %s, %s, %s, %s, %s, %s, %s);
+INSERT INTO songplays (start_time, user_id, level, song_id, artist_id, session_id, location, user_agent) 
+VALUES (%s, %s, %s, %s, %s, %s, %s, %s);
 """)
 
 user_table_insert = ("""
