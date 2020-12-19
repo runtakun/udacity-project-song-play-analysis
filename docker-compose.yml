@@ -1,0 +1,37 @@
+version: "3"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/work
+    depends_on:
+      - postgres
+
+  notebook:
+    image: jupyter/datascience-notebook
+    ports:
+      - "8888:8888"
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+    volumes:
+      - .:/home/jovyan/work
+    command: start-notebook.sh --NotebookApp.token=''
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:10.15
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./docker/postgres/initdb.d:/docker-entrypoint-initdb.d
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: studentdb
+      POSTGRES_INITDB_ARGS: "--encoding=UTF-8"
+    restart: always
+    user: root

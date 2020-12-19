@@ -1,0 +1,2 @@
+GRANT ALL PRIVILEGES ON DATABASE studentdb TO student;
+GRANT ALL PRIVILEGES ON DATABASE sparkifydb TO student;
