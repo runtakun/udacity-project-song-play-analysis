@@ -1,4 +1,4 @@
-# Song Play Analysis (Udacity Lesson 1)
+# Song Play Analysis (Udacity Data Engineering Nanodegree Project `Data Modeling with Postgres`)
 
 ## Description of this project
 Load song play data of a mobile application and register to PostgreSQL database.
