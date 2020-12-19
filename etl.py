@@ -29,16 +29,14 @@ def process_log_file(cur, filepath):
     # filter by NextSong action
     df = df.query("page=='NextSong'")
 
-    
     # insert time data records
-    
     time_data = []
     for i, t in df.iterrows():
         dt = datetime.fromtimestamp(t['ts']/1000)
         time_data.append([dt, dt.hour, dt.day, dt.date().isocalendar()[1], dt.month, dt.year, dt.weekday()])
 
     column_labels = ['start_time', 'hour', 'day', 'week', 'month', 'year', 'weekday']
-    time_df = pd.DataFrame(time_data,columns=column_labels)
+    time_df = pd.DataFrame(time_data, columns=column_labels)
 
     cur.execute("DELETE FROM time;")
 
@@ -53,23 +51,22 @@ def process_log_file(cur, filepath):
     for i, row in user_df.iterrows():
         cur.execute(user_table_insert, row)
 
-    cur.execute("DELETE FROM songplays;")
-
     # insert songplay records
     for index, row in df.iterrows():
         start_time = datetime.fromtimestamp(t['ts']/1000)
-        
+
         # get songid and artistid from song and artist tables
         cur.execute(song_select, (row.song, row.artist, row.length))
         results = cur.fetchone()
-        
+
         if results:
             songid, artistid = results
         else:
             songid, artistid = None, None
 
         # insert songplay record
-        songplay_data = [start_time, row['userId'], row['level'], songid, artistid, row['sessionId'], row['location'],row['userAgent']]
+        songplay_data = [start_time, row['userId'], row['level'], songid, artistid, row['sessionId'], row['location'],
+                         row['userAgent']]
         cur.execute(songplay_table_insert, songplay_data)
 
 
@@ -77,8 +74,8 @@ def process_data(cur, conn, filepath, func):
     # get all files matching extension from directory
     all_files = []
     for root, dirs, files in os.walk(filepath):
-        files = glob.glob(os.path.join(root,'*.json'))
-        for f in files :
+        files = glob.glob(os.path.join(root, '*.json'))
+        for f in files:
             all_files.append(os.path.abspath(f))
 
     # get total number of files found
@@ -93,7 +90,7 @@ def process_data(cur, conn, filepath, func):
 
 
 def main():
-    conn = psycopg2.connect("host=127.0.0.1 dbname=sparkifydb user=student password=student")
+    conn = psycopg2.connect("host=postgres dbname=sparkifydb user=student password=student")
     cur = conn.cursor()
 
     process_data(cur, conn, filepath='data/song_data', func=process_song_file)

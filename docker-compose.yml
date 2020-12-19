@@ -21,6 +21,7 @@ services:
     command: start-notebook.sh --NotebookApp.token=''
     depends_on:
       - postgres
+    working_dir: /home/jovyan/work
 
   postgres:
     image: postgres:10.15
