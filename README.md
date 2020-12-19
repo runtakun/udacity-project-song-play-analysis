@@ -18,3 +18,5 @@ docker-compose exec app python3 create_tables.py
 # run ETL
 docker-compose exec app python3 etl.py
 ```
+
+# ERD
